@@ -6,7 +6,7 @@
 [node name="UpgradeScreen" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_nlfcw")
-ability_card_scene = ExtResource("1_oxqeh")
+upgrade_card_scene = ExtResource("1_oxqeh")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
