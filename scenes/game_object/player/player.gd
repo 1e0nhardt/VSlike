@@ -7,6 +7,8 @@ const ACCELERATION_SMOOTHING = 25
 @onready var health_component = $HealthComponent
 @onready var health_bar = $HealthBar
 @onready var abilities = $Abilities
+@onready var animation_player = $AnimationPlayer
+@onready var visual = $Visual
 
 var number_colliding_bodies = 0
 
@@ -24,8 +26,21 @@ func _process(delta):
     var movement = get_movement_vector()
     var direction = movement.normalized()
     var target_velocity = MAX_SPEED * direction
+
     velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
+
     move_and_slide()
+
+    if movement.x != 0 or movement.y != 0:
+        animation_player.play("move")
+    else:
+        animation_player.play("RESET")
+
+    var movement_sign = sign(movement.x)
+    if movement_sign == 0:
+        visual.scale = Vector2.ONE
+    else:
+        visual.scale = Vector2(movement_sign, visual.scale.y)
 
 
 func get_movement_vector():
@@ -40,8 +55,6 @@ func check_damage():
 
     health_component.damage(5)
     damage_interval_timer.start()
-
-    print(health_component.current_health)
 
 
 func update_health_display():
@@ -69,7 +82,7 @@ func on_health_changed():
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
     if not upgrade is Ability:
         return
-        
+
     var ability_scene = upgrade.ability_controller_scene
     var ability_instance = ability_scene.instantiate()
     abilities.add_child(ability_instance)

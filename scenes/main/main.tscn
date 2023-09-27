@@ -51,7 +51,7 @@ y_sort_enabled = true
 position = Vector2(316, 187)
 
 [node name="BasicEnemy" parent="Entities" instance=ExtResource("4_yd5cl")]
-position = Vector2(23, 27)
+position = Vector2(24, 44)
 
 [node name="BasicEnemy2" parent="Entities" instance=ExtResource("4_yd5cl")]
 position = Vector2(474, 136)
@@ -60,10 +60,10 @@ position = Vector2(474, 136)
 position = Vector2(136, 251)
 
 [node name="ExperienceVial" parent="Entities" instance=ExtResource("8_dhk5t")]
-position = Vector2(228, 169)
+position = Vector2(303, 234)
 
 [node name="ExperienceVial2" parent="Entities" instance=ExtResource("8_dhk5t")]
-position = Vector2(264, 244)
+position = Vector2(264, 200)
 
 [node name="ExperienceVial5" parent="Entities" instance=ExtResource("8_dhk5t")]
 position = Vector2(345, 221)

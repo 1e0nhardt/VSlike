@@ -1,6 +1,6 @@
 extends Node
 
-const SPAWN_RADIUS = 330
+const SPAWN_RADIUS = 300
 
 @export var basic_enemy_scene: PackedScene
 @export var arena_time_manager: Node
@@ -24,7 +24,9 @@ func get_spawn_position():
     var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
     var spawn_position = Vector2.ZERO
 
+    # 不知道为什么，还是偶尔会有敌人生成在外围
     for i in 4:
+        print(i)
         spawn_position = player.global_position + random_direction * SPAWN_RADIUS
         
         # 碰撞检测
@@ -33,7 +35,7 @@ func get_spawn_position():
         if result.is_empty():
             return spawn_position
         else:
-            random_direction = random_direction.rotated(PI / 2.)
+            random_direction = random_direction.rotated(PI / 2.0)
     
     return spawn_position
 
@@ -57,4 +59,3 @@ func on_arena_difficulty_increased(arena_difficulty: int):
     var time_off = (.1 / 12) * arena_difficulty
     time_off = min(time_off, 0.7)
     timer.wait_time = base_spawn_time - time_off
-    print(timer.wait_time)

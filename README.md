@@ -32,6 +32,8 @@ Y Sort Enabled: 根据y坐标决定渲染顺序
     - 设置填充属性
     - 设置物理碰撞
 
+### AnimationPlayer
+- player.play("anim_flip_name")
 
 ## 基础机制
 
