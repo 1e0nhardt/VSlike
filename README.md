@@ -35,6 +35,14 @@ Y Sort Enabled: 根据y坐标决定渲染顺序
 ### AnimationPlayer
 - player.play("anim_flip_name")
 
+### AudioStreamPlayer/AudioStreamPlayer2D
+- player.play()
+- stream: 音频
+- max_distance: 能听见声音的最远距离(发声点到屏幕中心像素,在2D中)
+- bus: 音轨。可以分开设置音效和背景音乐。
+- AudioStreamPlayer没有距离概念，就单纯播放一段声音。适合UI音效。
+- 循环播放: 在Godot中打开音频文件，选中Loop后Reimport
+
 ## 基础机制
 
 ### 碰撞检测

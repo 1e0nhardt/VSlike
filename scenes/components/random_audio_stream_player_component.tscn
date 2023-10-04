@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2sjqmff6df6i"]
+
+[ext_resource type="Script" path="res://scenes/components/random_audio_stream_player_component.gd" id="1_lutoo"]
+
+[node name="RandomAudioStreamPlayerComponent" type="AudioStreamPlayer"]
+script = ExtResource("1_lutoo")
