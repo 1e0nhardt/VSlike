@@ -1,9 +1,49 @@
-[gd_scene load_steps=13 format=3 uid="uid://5i0d6adeu72b"]
+[gd_scene load_steps=12 format=3 uid="uid://5i0d6adeu72b"]
 
 [ext_resource type="Texture2D" uid="uid://bxcvkj1303jxt" path="res://scenes/game_object/player/player.png" id="1_asvia"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_kinvk"]
 [ext_resource type="PackedScene" uid="uid://oxa5vxatygx" path="res://scenes/components/health_component.tscn" id="2_jvofn"]
 [ext_resource type="PackedScene" uid="uid://ykcperutl5y" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_rbmh1"]
+[ext_resource type="PackedScene" uid="uid://ptnqojjlub2o" path="res://scenes/components/velocity_component.tscn" id="4_cxumj"]
+
+[sub_resource type="Animation" id="Animation_l2fdn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_1clew"]
 resource_name = "move"
@@ -47,61 +87,11 @@ tracks/2/keys = {
 "values": [Vector2(1, 1), Vector2(0.8, 1.1), Vector2(1.05, 0.9), Vector2(1.2, 0.9), Vector2(1.1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_l2fdn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visual/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visual/Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bs0wq"]
 _data = {
 "RESET": SubResource("Animation_l2fdn"),
 "move": SubResource("Animation_1clew")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk11f"]
-bg_color = Color(0.247059, 0.14902, 0.192157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v6b6"]
-bg_color = Color(0.262745, 0.882353, 0.701961, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.247059, 0.14902, 0.192157, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4n6pd"]
 radius = 5.09902
@@ -130,6 +120,10 @@ max_health = 50.0
 
 [node name="SwordAbilityController" parent="Abilities" instance=ExtResource("2_rbmh1")]
 
+[node name="VelocityComponent" parent="." instance=ExtResource("4_cxumj")]
+max_speed = 90.0
+acceleration = 25.0
+
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
@@ -147,8 +141,6 @@ offset_top = -20.0
 offset_right = 12.0
 offset_bottom = -16.0
 pivot_offset = Vector2(12, 2)
-theme_override_styles/background = SubResource("StyleBoxFlat_vk11f")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5v6b6")
 max_value = 1.0
 value = 0.5
 show_percentage = false

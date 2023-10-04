@@ -46,6 +46,11 @@ var query_parameters = PhysicsRayQueryParameters2D.create(player.global_position
 var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_parameters)
 ```
 
+### 制造延迟
+- await get_tree().create_timer(delay_time).timeout
+- 创建一个一次性定时器
+- 等到timeout信号前，挂起当前程序
+
 ### 程序动画
 ```python
 func _ready():
@@ -58,4 +63,37 @@ func _ready():
 func tween_method(input_value: float):
     # input_value = t/duration * (to - from) + from
     pass
+
+func on_area_entered(other_area: Area2D):
+    Callable(disable_collision).call_deferred() # 不要在物体碰撞计算过程中改变Collision的属性
+
+    var tween = create_tween()
+    tween.set_parallel() # 设置多个tween并行执行
+    tween.tween_method(tween_collect.bind(global_position), 0.0, 1.0, 0.5)\
+    .set_ease(Tween.EASE_IN)\
+    .set_trans(Tween.TRANS_BACK)
+    tween.tween_property(sprite, "scale", Vector2.ZERO, 0.1).set_delay(0.4)
+    tween.chain() # 等待所有tween执行完成
+    tween.tween_callback(collect)
 ```
+
+### 粒子系统
+
+## UI
+
+### 鼠标事件
+- Mouse->Stop/Ignore/Pass
+- PanelContainer默认为Stop
+
+### 字体设置
+- 像素字体，将Antialiasing, Hint, Subpixel location全设置为None。
+- 创建一个theme资源文件，用于设置UI默认行为
+- 在project settings->GUI->Themes->Custom (Advanced Settings)
+
+### 9-patch Panel
+- theme.tres->Type: panel container
+- StyleBoxTexture
+    - Texture: UI图
+    - Subregion: 选择UI图中的子区域并划分9个宫格
+    - 四个角不变，四条边和中间块会根据缩放自适应拉伸
+    - content margin

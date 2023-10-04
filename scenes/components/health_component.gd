@@ -22,7 +22,7 @@ func damage(damage_amount: float):
     current_health = max(current_health - damage_amount, 0)
     health_changed.emit()
     call_deferred("check_death")
-#	Callable(check_death).call_deferred() # 和上一行等价
+#    Callable(check_death).call_deferred() # 和上一行等价
 
 
 func check_death():
