@@ -19,9 +19,13 @@ https://www.udemy.com/course/create-a-complete-2d-arena-survival-roguelike-game-
 
 ### get_tree()
 - 暂停/继续: get_tree().paused = true/false
-    - 会暂停所有节点，包括当前ui节点。因此对于ui节点，需要将其Process Mode改为always。
+    - 会暂停所有节点，包括当前ui节点。
+    - 因此对于ui节点，需要将其Process Mode改为always。
+    - 其他节点有必要的话，也需要改
 - 切换场景: get_tree().change_scene_to_file(scene_file)
 - 退出游戏: get_tree().quit()
+- get_tree().root.set_input_as_handled() 终止事件冒泡
+- 调用Group中所有节点的方法: get_tree().call_group("group_name", "method_name")
 
 ### Node2D/CanvasItem
 Y Sort Enabled: 根据y坐标决定渲染顺序
@@ -34,6 +38,7 @@ Y Sort Enabled: 根据y坐标决定渲染顺序
 
 ### AnimationPlayer
 - player.play("anim_flip_name")
+- player.play_backwards("anim_flip_name")
 
 ### AudioStreamPlayer/AudioStreamPlayer2D
 - player.play()
@@ -85,7 +90,45 @@ func on_area_entered(other_area: Area2D):
     tween.tween_callback(collect)
 ```
 
-### 粒子系统
+### 音量控制
+```python
+func get_bus_volume_percent(bus_name: String):
+    var bus_index = AudioServer.get_bus_index(bus_name)
+    var volume_db = AudioServer.get_bus_volume_db(bus_index)
+    return db_to_linear(volume_db)
+
+
+func set_bus_volume_percent(bus_name: String, percent: float):
+    var bus_index = AudioServer.get_bus_index(bus_name)
+    var volume_db = linear_to_db(percent)
+    AudioServer.set_bus_volume_db(bus_index, volume_db)
+```
+
+### 全屏显示
+```python
+var mode = DisplayServer.window_get_mode()
+
+if mode != DisplayServer.WINDOW_MODE_FULLSCREEN:
+    DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+else:
+    DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+```
+
+### Save&Load
+- 设置保存目录: Project->General->config->custom user dir相关
+- 打开该目录: Project->Open User Data Folder
+
+```python
+func load_save_file():
+    if FileAccess.file_exists(SAVE_FILE_PATH):
+        var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
+        save_data = file.get_var()
+
+
+func save():
+    var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
+    file.store_var(save_data)
+```
 
 ## UI
 
@@ -105,3 +148,8 @@ func on_area_entered(other_area: Area2D):
     - Subregion: 选择UI图中的子区域并划分9个宫格
     - 四个角不变，四条边和中间块会根据缩放自适应拉伸
     - content margin
+
+## 构建可执行文件
+- Project Settings菜单中的Add，可以为当前选中设置选项添加在不同环境下的配置。
+- Project Settings->export
+- 需要在Editor Settings->export->windows 中配置rcedit.exe路径
