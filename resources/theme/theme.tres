@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://rqse2dlatj35"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://rqse2dlatj35"]
 
 [ext_resource type="FontFile" uid="uid://dy7r2pqk0bgrd" path="res://resources/theme/PixelDigivolve-mOm9.ttf" id="1_rk77v"]
 [ext_resource type="Texture2D" uid="uid://cdek26hoxbuev" path="res://assets/ui/ui.png" id="1_yvse3"]
@@ -41,6 +41,50 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 region_rect = Rect2(8, 19, 6, 6)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sw30x"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dkbp5"]
+size = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_aqsaw"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 64, 255, 255, 255, 64, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_sk5ru"]
+image = SubResource("Image_aqsaw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rhii"]
+bg_color = Color(0.458824, 0.890196, 1, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgkx6"]
+bg_color = Color(0.458824, 0.890196, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgbu8"]
+content_margin_left = 2.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 4.0
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_74nd6"]
 texture = ExtResource("1_yvse3")
 texture_margin_left = 3.0
@@ -73,6 +117,14 @@ Button/styles/focus = SubResource("StyleBoxEmpty_yjl7l")
 Button/styles/hover = SubResource("StyleBoxTexture_3trsg")
 Button/styles/normal = SubResource("StyleBoxTexture_n07x2")
 Button/styles/pressed = SubResource("StyleBoxTexture_5rn0m")
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = SubResource("PlaceholderTexture2D_sw30x")
+HSlider/icons/grabber_highlight = SubResource("PlaceholderTexture2D_dkbp5")
+HSlider/icons/tick = SubResource("ImageTexture_sk5ru")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_1rhii")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_kgkx6")
+HSlider/styles/slider = SubResource("StyleBoxFlat_vgbu8")
 Label/constants/line_spacing = 0
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_74nd6")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_vk11f")
